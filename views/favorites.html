@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Favorites</title>
+  <link rel="stylesheet" href="favorites.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🍳 AI Recipe Maker</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Recipe Generator</a></li>
+      <li><a href="/explore.html">Explore</a></li>
+      <li id="authLink"><a href="/auth.html">Login / Signup</a></li>
+    </ul>
+  </nav>
+
+  <h1 id="Heading">My Favorite Recipes</h1>
+
+  <div id="favoritesBox">Loading...</div>
+
+  <!-- Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    async function loadFavorites() {
+      async function checkSession() {
+        try {
+          const res = await fetch('/check-session', { credentials: 'include' });
+          const data = await res.json();
+          const authLink = document.getElementById("authLink");
+          if (data.loggedIn) {
+            authLink.innerHTML = `
+              <span>👤 ${data.email}</span>
+              <a href="/favorites.html">Favorites</a>
+              <form action="/logout" method="POST" style="display:inline;">
+                <button type="submit" class="logout-btn">Logout</button>
+              </form>
+            `;
+          } else {
+            authLink.innerHTML = `<a href="/auth.html">Login / Signup</a>`;
+          }
+        } catch (err) {
+          console.error("Error checking session:", err);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", checkSession);
+
+      try {
+        const res = await fetch("/favorites");
+        const data = await res.json();
+        const box = document.getElementById("favoritesBox");
+
+        if (!Array.isArray(data) || data.length === 0) {
+          box.innerHTML = "<p>No favorites yet!</p>";
+          return;
+        }
+
+        box.innerHTML = `
+          <div id="favoritesList">
+            <h3>Favorites</h3>
+            <ul>
+              ${data.map((fav, i) => `
+                <li>
+                  <button class="fav-item" data-index="${i}" data-id="${fav._id}">${fav.title}</button>
+                </li>
+              `).join("")}
+            </ul>
+          </div>
+          <div id="favoriteDetails">
+            <p>Select a recipe to view details</p>
+          </div>
+        `;
+
+        // Show recipe when clicked
+        document.querySelectorAll(".fav-item").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const recipe = data[btn.dataset.index];
+            document.getElementById("favoriteDetails").innerHTML = `
+              <div class="recipe-box">
+                <h2>${recipe.title}</h2>
+                <div class="recipe-content">
+                  ${marked.parse(recipe.content)}
+                </div>
+                <button class="delete-btn" data-id="${recipe._id}">🗑️ Delete Recipe</button>
+              </div>
+            `;
+
+            // Delete handler
+            document.querySelector(".delete-btn").addEventListener("click", async () => {
+              if (!confirm("Are you sure you want to delete this recipe?")) return;
+
+              try {
+                const res = await fetch("/favorites/" + recipe._id, {
+                  method: "DELETE"
+                });
+
+                if (res.ok) {
+                  alert("Recipe deleted!");
+                  loadFavorites(); // Refresh list
+                } else {
+                  alert("Failed to delete recipe.");
+                }
+              } catch (err) {
+                console.error("Delete error:", err);
+                alert("Error deleting recipe.");
+              }
+            });
+          });
+        });
+
+      } catch (err) {
+        console.error("Error loading favorites:", err);
+        document.getElementById("favoritesBox").innerHTML = "<p>Failed to load favorites.</p>";
+      }
+    }
+
+    loadFavorites();
+  </script>
+
+</body>
+</html>

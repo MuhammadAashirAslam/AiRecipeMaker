@@ -1,0 +1,240 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%);
+  min-height: 100vh;
+  color: white;
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔹 Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: relative;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links li a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links li a:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 4px;
+  left: 50%;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+  width: 80%;
+  left: 10%;
+}
+
+/* 🔹 Auth Container */
+.auth-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Auth Card Flip */
+.auth-card {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  max-width: 95vw;
+  max-height: 90vh;
+  perspective: 1200px;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+  background: transparent;
+}
+
+.auth-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 25px;
+  display: flex;
+  overflow: hidden;
+}
+
+.card-front,
+.card-back {
+  background: white;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* 🔹 Welcome Section */
+.welcome-section {
+  flex: 1;
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+}
+
+.welcome-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 24px;
+}
+
+.switch-btn {
+  padding: 12px 28px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  font-weight: 500;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.switch-btn:hover {
+  background: white;
+  color: #6D28D9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* 🔹 Form Section */
+.form-section {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.form-section form input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.form-section form input:focus {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 4px rgba(139,92,246,0.15);
+  outline: none;
+}
+
+.form-section form button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(45deg, #8B5CF6, #7C3AED);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(139,92,246,0.3);
+}
+
+.form-section form button:hover {
+  background: linear-gradient(45deg, #7C3AED, #6D28D9);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(139,92,246,0.4);
+}
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+  .auth-card {
+    height: auto;
+  }
+  .card-side {
+    flex-direction: column;
+    position: relative;
+    height: auto;
+  }
+  .welcome-section {
+    padding: 30px 20px;
+  }
+  .form-section {
+    padding: 30px 20px;
+  }
+}

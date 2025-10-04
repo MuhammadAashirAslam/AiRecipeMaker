@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Recipe Maker - Login/Signup</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🍳 AI Recipe Maker</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Recipe Generator</a></li>
+      <li><a href="/explore.html">Explore</a></li>
+      <li id="authLink"><a href="/auth.html">Login / Signup</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card" id="authCard">
+      <!-- Login Side -->
+      <div class="card-side card-front">
+        <div class="welcome-section">
+          <div class="logo">🍳</div>
+          <h2 class="welcome-text">Hello, Welcome Back!</h2>
+          <button class="switch-btn" onclick="flipCard()">Register</button>
+        </div>
+        <div class="form-section">
+          <h2 class="form-title">Login</h2>
+          <form id="loginForm" action="/login" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <p id="loginError" style="color: red; font-size: 14px; margin-top: 8px;"></p>
+          </form>
+        </div>
+      </div>
+      <!-- Signup Side -->
+      <div class="card-side card-back">
+        <div class="form-section">
+          <h2 class="form-title">Register</h2>
+          <form id="signupForm" action="/signup" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Register</button>
+            <p id="signupError" style="color: red; font-size: 14px; margin-top: 8px;"></p>
+          </form>
+        </div>
+        <div class="welcome-section">
+          <h2 class="welcome-text">Welcome!</h2>
+          <button class="switch-btn" onclick="flipCard()">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function flipCard() {
+      document.getElementById('authCard').classList.toggle('flipped');
+    }
+
+    // Show error from query params
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+    const form = params.get("form"); // "login" or "signup"
+    if (error) {
+      if (form === "login") {
+        document.getElementById("loginError").textContent = error;
+      } else if (form === "signup") {
+        document.getElementById("signupError").textContent = error;
+        // Flip card to signup side if error came from signup
+        document.getElementById("authCard").classList.add("flipped");
+      }
+    }
+
+    // 🔹 Navbar session check
+    async function checkSession() {
+      const res = await fetch('/check-session', { credentials: 'include' });
+      const data = await res.json();
+      const authLink = document.getElementById("authLink");
+      if (data.loggedIn) {
+        authLink.innerHTML = `
+          <span>👤 ${data.email}</span>
+          <form action="/logout" method="POST" style="display:inline;">
+            <button type="submit" style="background:none;border:none;color:#f00;cursor:pointer;">Logout</button>
+          </form>
+        `;
+      } else {
+        authLink.innerHTML = `<a href="/auth.html">Login / Signup</a>`;
+      }
+    }
+    document.addEventListener("DOMContentLoaded", checkSession);
+  </script>
+</body>
+</html>
+  

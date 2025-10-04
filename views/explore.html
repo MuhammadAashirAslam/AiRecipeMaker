@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Recipe Maker - Explore</title>
+  <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🍳 AI Recipe Maker</div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Recipe Generator</a></li>
+      <li><a href="/explore.html" class="active">Explore</a></li>
+      <li id="authLink"><a href="/auth.html">Login / Signup</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Explore Recipes</h1>
+    <div class="recipes-grid">
+      <!-- Recipe Card 1 -->
+      <div class="recipe-card" onclick="openRecipeModal('spicy-chicken-rice')">
+        <div class="recipe-image">
+          <div class="recipe-emoji">🍗</div>
+        </div>
+        <div class="recipe-info">
+          <h3>Spicy Chicken Rice</h3>
+          <p class="ingredients-preview">Chicken, rice, onion, spices</p>
+          <div class="recipe-meta">
+            <span class="cook-time">⏱️ 30 mins</span>
+            <span class="difficulty">🔥 Medium</span>
+          </div>
+        </div>
+        <div class="recipe-overlay">
+          <span>Click to view recipe</span>
+        </div>
+      </div>
+
+      <!-- Recipe Card 2 -->
+      <div class="recipe-card" onclick="openRecipeModal('vegetable-stir-fry')">
+        <div class="recipe-image">
+          <div class="recipe-emoji">🥬</div>
+        </div>
+        <div class="recipe-info">
+          <h3>Vegetable Stir Fry</h3>
+          <p class="ingredients-preview">Carrots, broccoli, soy sauce, garlic</p>
+          <div class="recipe-meta">
+            <span class="cook-time">⏱️ 15 mins</span>
+            <span class="difficulty">🟢 Easy</span>
+          </div>
+        </div>
+        <div class="recipe-overlay">
+          <span>Click to view recipe</span>
+        </div>
+      </div>
+
+      <!-- Recipe Card 3 -->
+      <div class="recipe-card" onclick="openRecipeModal('tomato-pasta')">
+        <div class="recipe-image">
+          <div class="recipe-emoji">🍝</div>
+        </div>
+        <div class="recipe-info">
+          <h3>Classic Tomato Pasta</h3>
+          <p class="ingredients-preview">Pasta, tomato, garlic, olive oil, basil</p>
+          <div class="recipe-meta">
+            <span class="cook-time">⏱️ 20 mins</span>
+            <span class="difficulty">🟢 Easy</span>
+          </div>
+        </div>
+        <div class="recipe-overlay">
+          <span>Click to view recipe</span>
+        </div>
+      </div>
+
+      <!-- Recipe Card 4 -->
+      <div class="recipe-card" onclick="openRecipeModal('chocolate-cake')">
+        <div class="recipe-image">
+          <div class="recipe-emoji">🍰</div>
+        </div>
+        <div class="recipe-info">
+          <h3>Chocolate Cake</h3>
+          <p class="ingredients-preview">Flour, cocoa, eggs, sugar, butter</p>
+          <div class="recipe-meta">
+            <span class="cook-time">⏱️ 45 mins</span>
+            <span class="difficulty">🔥 Hard</span>
+          </div>
+        </div>
+        <div class="recipe-overlay">
+          <span>Click to view recipe</span>
+        </div>
+      </div>
+
+      <!-- Recipe Card 5 -->
+      <div class="recipe-card" onclick="openRecipeModal('greek-salad')">
+        <div class="recipe-image">
+          <div class="recipe-emoji">🥗</div>
+        </div>
+        <div class="recipe-info">
+          <h3>Greek Salad</h3>
+          <p class="ingredients-preview">Tomatoes, cucumber, feta, olives</p>
+          <div class="recipe-meta">
+            <span class="cook-time">⏱️ 10 mins</span>
+            <span class="difficulty">🟢 Easy</span>
+          </div>
+        </div>
+        <div class="recipe-overlay">
+          <span>Click to view recipe</span>
+        </div>
+      </div>
+
+      <!-- Recipe Card 6 -->
+      <div class="recipe-card" onclick="openRecipeModal('beef-tacos')">
+        <div class="recipe-image">
+          <div class="recipe-emoji">🌮</div>
+        </div>
+        <div class="recipe-info">
+          <h3>Beef Tacos</h3>
+          <p class="ingredients-preview">Ground beef, tortillas, cheese, lettuce</p>
+          <div class="recipe-meta">
+            <span class="cook-time">⏱️ 25 mins</span>
+            <span class="difficulty">🟡 Medium</span>
+          </div>
+        </div>
+        <div class="recipe-overlay">
+          <span>Click to view recipe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recipe Modal -->
+  <div id="recipeModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Recipe Name</h2>
+        <span class="close" onclick="closeRecipeModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="recipe-details">
+          <div class="recipe-meta-full">
+            <div class="meta-item">
+              <span class="meta-label">Cook Time:</span>
+              <span id="modalCookTime">30 mins</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Difficulty:</span>
+              <span id="modalDifficulty">Medium</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Serves:</span>
+              <span id="modalServings">4 people</span>
+            </div>
+          </div>
+          
+          <div class="ingredients-section">
+            <h3>🛒 Ingredients</h3>
+            <ul id="modalIngredients">
+              <!-- Ingredients will be populated by JavaScript -->
+            </ul>
+          </div>
+          
+          <div class="instructions-section">
+            <h3>👩‍🍳 Instructions</h3>
+            <ol id="modalInstructions">
+              <!-- Instructions will be populated by JavaScript -->
+            </ol>
+          </div>
+          
+          <div class="tips-section">
+            <h3>💡 Tips</h3>
+            <div id="modalTips">
+              <!-- Tips will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Recipe data
+    const recipes = {
+      'spicy-chicken-rice': {
+        title: 'Spicy Chicken Rice',
+        cookTime: '30 mins',
+        difficulty: 'Medium',
+        servings: '4 people',
+        ingredients: [
+          '2 cups basmati rice',
+          '1 lb chicken breast, diced',
+          '1 large onion, chopped',
+          '3 cloves garlic, minced',
+          '1 inch ginger, grated',
+          '2 tsp cumin powder',
+          '1 tsp coriander powder',
+          '1 tsp red chili powder',
+          '1/2 tsp turmeric',
+          '2 tbsp vegetable oil',
+          'Salt to taste',
+          '2 cups chicken broth',
+          'Fresh cilantro for garnish'
+        ],
+        instructions: [
+          'Rinse rice until water runs clear, then soak for 30 minutes.',
+          'Heat oil in a large pot over medium-high heat.',
+          'Add onions and cook until golden brown, about 5 minutes.',
+          'Add garlic and ginger, cook for 1 minute until fragrant.',
+          'Add chicken pieces and cook until no longer pink, about 6-8 minutes.',
+          'Add all spices (cumin, coriander, chili powder, turmeric) and cook for 1 minute.',
+          'Drain rice and add to the pot, stir gently to coat with spices.',
+          'Pour in chicken broth and add salt to taste.',
+          'Bring to a boil, then reduce heat to low, cover and simmer for 18-20 minutes.',
+          'Let stand for 5 minutes, then fluff with a fork.',
+          'Garnish with fresh cilantro and serve hot.'
+        ],
+        tips: 'For extra flavor, toast the rice in the pot for 2-3 minutes before adding liquid. You can adjust the spice level by increasing or decreasing the chili powder.'
+      },
+      'vegetable-stir-fry': {
+        title: 'Vegetable Stir Fry',
+        cookTime: '15 mins',
+        difficulty: 'Easy',
+        servings: '3 people',
+        ingredients: [
+          '2 cups broccoli florets',
+          '1 large carrot, sliced',
+          '1 bell pepper, sliced',
+          '1 zucchini, sliced',
+          '2 cloves garlic, minced',
+          '1 inch ginger, grated',
+          '3 tbsp soy sauce',
+          '1 tbsp oyster sauce',
+          '1 tsp sesame oil',
+          '2 tbsp vegetable oil',
+          '1 tsp cornstarch',
+          '2 green onions, chopped',
+          '1 tbsp sesame seeds'
+        ],
+        instructions: [
+          'Prepare all vegetables by washing and cutting them into similar-sized pieces.',
+          'Mix soy sauce, oyster sauce, sesame oil, and cornstarch in a small bowl.',
+          'Heat vegetable oil in a large wok or skillet over high heat.',
+          'Add garlic and ginger, stir-fry for 30 seconds until fragrant.',
+          'Add carrots first and stir-fry for 2 minutes.',
+          'Add broccoli and bell pepper, stir-fry for 3-4 minutes.',
+          'Add zucchini and stir-fry for 2 minutes more.',
+          'Pour the sauce mixture over vegetables and toss to coat.',
+          'Stir-fry for another 1-2 minutes until sauce thickens.',
+          'Remove from heat and garnish with green onions and sesame seeds.',
+          'Serve immediately over rice or noodles.'
+        ],
+        tips: 'Keep vegetables crisp by cooking over high heat and not overcooking. You can substitute any vegetables you have on hand - just add harder vegetables first.'
+      },
+      'tomato-pasta': {
+        title: 'Classic Tomato Pasta',
+        cookTime: '20 mins',
+        difficulty: 'Easy',
+        servings: '4 people',
+        ingredients: [
+          '1 lb spaghetti or penne pasta',
+          '2 cans (14 oz each) crushed tomatoes',
+          '4 cloves garlic, minced',
+          '1 medium onion, finely chopped',
+          '1/4 cup olive oil',
+          '1/2 cup fresh basil, chopped',
+          '1/4 cup parmesan cheese, grated',
+          '1 tsp dried oregano',
+          '1/2 tsp red pepper flakes',
+          'Salt and black pepper to taste',
+          '2 tbsp tomato paste',
+          '1/2 cup dry white wine (optional)'
+        ],
+        instructions: [
+          'Bring a large pot of salted water to boil and cook pasta according to package directions.',
+          'Heat olive oil in a large skillet over medium heat.',
+          'Add onion and cook until softened, about 5 minutes.',
+          'Add garlic and cook for 1 minute until fragrant.',
+          'Add tomato paste and cook for 1 minute, stirring constantly.',
+          'Add white wine (if using) and let it reduce by half.',
+          'Add crushed tomatoes, oregano, and red pepper flakes.',
+          'Season with salt and pepper, then simmer for 10-15 minutes.',
+          'Drain pasta, reserving 1 cup of pasta water.',
+          'Add pasta to the sauce and toss to combine.',
+          'Add pasta water if needed to achieve desired consistency.',
+          'Stir in fresh basil and serve with parmesan cheese.'
+        ],
+        tips: 'Save some pasta water - its starch helps bind the sauce to the pasta. Fresh basil should be added at the end to preserve its flavor and color.'
+      },
+      'chocolate-cake': {
+        title: 'Rich Chocolate Cake',
+        cookTime: '45 mins',
+        difficulty: 'Hard',
+        servings: '8 people',
+        ingredients: [
+          '2 cups all-purpose flour',
+          '2 cups granulated sugar',
+          '3/4 cup unsweetened cocoa powder',
+          '2 tsp baking soda',
+          '1 tsp baking powder',
+          '1 tsp salt',
+          '2 large eggs',
+          '1 cup buttermilk',
+          '1/2 cup vegetable oil',
+          '2 tsp vanilla extract',
+          '1 cup hot coffee',
+          '1/2 cup butter, softened',
+          '4 cups powdered sugar',
+          '1/2 cup cocoa powder for frosting',
+          '1/2 cup heavy cream'
+        ],
+        instructions: [
+          'Preheat oven to 350°F (175°C). Grease and flour two 9-inch round pans.',
+          'In a large bowl, whisk together flour, sugar, cocoa, baking soda, baking powder, and salt.',
+          'In another bowl, beat eggs, then add buttermilk, oil, and vanilla.',
+          'Gradually add wet ingredients to dry ingredients, mixing until combined.',
+          'Slowly stir in hot coffee (batter will be thin).',
+          'Divide batter evenly between prepared pans.',
+          'Bake for 28-32 minutes until toothpick inserted in center comes out clean.',
+          'Cool in pans for 10 minutes, then turn out onto wire racks.',
+          'For frosting: beat butter until light and fluffy.',
+          'Gradually add powdered sugar and cocoa, alternating with cream.',
+          'Beat until smooth and spreadable.',
+          'Frost cooled cake and serve.'
+        ],
+        tips: 'The hot coffee enhances the chocolate flavor - you can substitute with hot water if preferred. Make sure all ingredients are at room temperature for best results.'
+      },
+      'greek-salad': {
+        title: 'Fresh Greek Salad',
+        cookTime: '10 mins',
+        difficulty: 'Easy',
+        servings: '4 people',
+        ingredients: [
+          '4 large tomatoes, cut in wedges',
+          '1 cucumber, sliced',
+          '1 red onion, thinly sliced',
+          '1 cup kalamata olives',
+          '8 oz feta cheese, cubed',
+          '1/4 cup olive oil',
+          '2 tbsp red wine vinegar',
+          '1 tsp dried oregano',
+          '1/2 tsp salt',
+          '1/4 tsp black pepper',
+          '2 tbsp fresh parsley, chopped'
+        ],
+        instructions: [
+          'Wash and prepare all vegetables.',
+          'Cut tomatoes into wedges and place in a large bowl.',
+          'Add sliced cucumber and red onion to the bowl.',
+          'Add kalamata olives and feta cheese cubes.',
+          'In a small bowl, whisk together olive oil, red wine vinegar, oregano, salt, and pepper.',
+          'Pour dressing over the salad ingredients.',
+          'Gently toss everything together to coat with dressing.',
+          'Let sit for 10 minutes to allow flavors to meld.',
+          'Sprinkle with fresh parsley before serving.',
+          'Serve immediately at room temperature.',
+          'Best enjoyed fresh, but can be refrigerated for up to 2 hours.'
+        ],
+        tips: 'Use the best quality olive oil and feta cheese you can find. The salad is best served at room temperature to allow the flavors to shine.'
+      },
+      'beef-tacos': {
+        title: 'Seasoned Beef Tacos',
+        cookTime: '25 mins',
+        difficulty: 'Medium',
+        servings: '4 people',
+        ingredients: [
+          '1 lb ground beef',
+          '8 taco shells or soft tortillas',
+          '1 onion, diced',
+          '2 cloves garlic, minced',
+          '1 tbsp chili powder',
+          '1 tsp cumin',
+          '1/2 tsp paprika',
+          '1/2 tsp oregano',
+          '1/4 tsp cayenne pepper',
+          '1 cup shredded lettuce',
+          '1 cup shredded cheese',
+          '2 tomatoes, diced',
+          '1/2 cup sour cream',
+          '1/4 cup cilantro, chopped',
+          'Lime wedges for serving'
+        ],
+        instructions: [
+          'Heat a large skillet over medium-high heat.',
+          'Add ground beef and cook, breaking it up with a spoon.',
+          'Add diced onion and cook until beef is browned and onion is soft.',
+          'Add garlic and cook for 1 minute more.',
+          'Drain excess fat from the pan.',
+          'Add all spices (chili powder, cumin, paprika, oregano, cayenne).',
+          'Stir and cook for 2 minutes until fragrant.',
+          'Add 1/4 cup water and simmer for 5 minutes.',
+          'Warm taco shells according to package directions.',
+          'Prepare all toppings: shred lettuce and cheese, dice tomatoes.',
+          'Fill each taco shell with beef mixture.',
+          'Top with lettuce, cheese, tomatoes, sour cream, and cilantro.',
+          'Serve with lime wedges on the side.'
+        ],
+        tips: 'Let people build their own tacos for a fun, interactive meal. You can make the beef mixture ahead of time and reheat when ready to serve.'
+      }
+    };
+
+    // Modal functions
+    function openRecipeModal(recipeId) {
+      const recipe = recipes[recipeId];
+      if (!recipe) return;
+
+      document.getElementById('modalTitle').textContent = recipe.title;
+      document.getElementById('modalCookTime').textContent = recipe.cookTime;
+      document.getElementById('modalDifficulty').textContent = recipe.difficulty;
+      document.getElementById('modalServings').textContent = recipe.servings;
+
+      // Populate ingredients
+      const ingredientsList = document.getElementById('modalIngredients');
+      ingredientsList.innerHTML = '';
+      recipe.ingredients.forEach(ingredient => {
+        const li = document.createElement('li');
+        li.textContent = ingredient;
+        ingredientsList.appendChild(li);
+      });
+
+      // Populate instructions
+      const instructionsList = document.getElementById('modalInstructions');
+      instructionsList.innerHTML = '';
+      recipe.instructions.forEach(instruction => {
+        const li = document.createElement('li');
+        li.textContent = instruction;
+        instructionsList.appendChild(li);
+      });
+
+      // Populate tips
+      document.getElementById('modalTips').textContent = recipe.tips;
+
+      // Show modal
+      document.getElementById('recipeModal').style.display = 'block';
+    }
+
+    function closeRecipeModal() {
+      document.getElementById('recipeModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('recipeModal');
+      if (event.target == modal) {
+        closeRecipeModal();
+      }
+    }
+
+    // Session management
+    async function checkSession() {
+      try {
+        const res = await fetch('/check-session', { credentials: 'include' });
+        const data = await res.json();
+        const authLink = document.getElementById("authLink");
+        if (data.loggedIn) {
+          authLink.innerHTML = `
+            <span>👤 ${data.email}</span>
+            <a href="/favorites.html">Favorites</a>
+            <form action="/logout" method="POST" style="display:inline;">
+              <button type="submit" class="logout-btn">Logout</button>
+            </form>
+          `;
+        } else {
+          authLink.innerHTML = `<a href="/auth.html">Login / Signup</a>`;
+        }
+      } catch (err) {
+        console.error("Error checking session:", err);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", checkSession);
+  </script>
+</body>
+</html>

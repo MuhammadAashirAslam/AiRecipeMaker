@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AI Recipe Maker</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🍳 AI Recipe Maker</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/index.html">Recipe Generator</a></li>
+      <li><a href="/explore.html">Explore</a></li>
+      <li id="authLink"><a href="/auth.html">Login / Signup</a></li>
+    </ul>
+  </nav>
+
+  <!-- Recipe Form -->
+  <div class="container">
+    <h1>Welcome to AI Recipe Maker</h1>
+    
+    <!-- Typewriter Text -->
+    <div class="typewriter-container">
+      <span class="typewriter" id="typewriter"></span>
+    </div>
+  
+    <form id="recipeForm">
+      <input type="text" id="ingredients" placeholder="e.g. chicken, rice, onion" required>
+      <button type="submit">Generate Recipe</button>
+    </form>
+
+    <div id="recipeResult"></div>
+  </div>
+
+  <!-- 🔹 Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="/index.js"></script>
+</body>
+
+</html>

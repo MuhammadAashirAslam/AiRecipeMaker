@@ -1,0 +1,22 @@
+{
+  "name": "ai-recipe-maker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^4.6.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.18.2",
+    "node-fetch": "^3.3.2",
+    "openai": "^5.23.1"
+  }
+}
